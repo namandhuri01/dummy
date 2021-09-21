@@ -13,7 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    @can('update')
+                       {{__('naman')}}
+                    @endcan
                     {{ __('You are logged in!') }}
                 </div>
             </div>

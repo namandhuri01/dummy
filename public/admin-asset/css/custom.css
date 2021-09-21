@@ -1,0 +1,35 @@
+#dataTable1 th.sorting_asc{
+    background-image: url('../images/short-icon/sort_asc.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+#dataTable1 th.sorting_desc{
+    background-image: url('../images/short-icon/sort_desc.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+#dataTable1 th.sorting{
+    background-image: url('../images/short-icon/sort_both.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+td.status.delivered{
+    color: var(--success-color);
+}
+td.status.canceled{
+    color: var(--danger-color);
+}
+
+td.status.processing{
+    color: var(--primary-color)
+}
+
+td.status.on-hold{
+    color: var(--danger-color);
+}
+
+td.status.refunded{
+    color: #006b09;
+}
+

@@ -23,11 +23,11 @@ class Role extends Seeder
             ],
             [
                 'name' => 'editor',
-                'description' => 'editor'
+                'description' => 'editor can only see list and edit data'
             ],
             [
                 'name' => 'manager',
-                'description' => 'manager can use'
+                'description' => 'manager can use all permission except delete'
             ],
             [
                 'name' => 'student',

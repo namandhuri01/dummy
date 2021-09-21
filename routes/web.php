@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +16,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('categories', ProductController::class);
+// Route::namespace('Admin')
+// 	->group(function () {
+//     Route::get('/', function () {
+//         return view('admin.login');
+//     })
+//     ->name('login')
+//     ->middleware('guest');
+
+//     Route::resource('dashboard','DashboardController');
+//     Route::resource('categories','CategoryController');
+
+// });
+
+Route::prefix('admin')
+        ->name('admin.')
+        ->group( function() {
+    // Route::get('/', function () {
+    //     return view('auth.login');
+    // })
+    // ->name('login')
+    // ->middleware('guest');
+
+    Route::get('dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
+    Route::resource('users',App\Http\Controllers\Admin\UserController::class);
+    Route::resource('colleges',App\Http\Controllers\Admin\CollegeController::class);
+    Route::resource('categories',App\Http\Controllers\Admin\CategoryController::class);
 });
