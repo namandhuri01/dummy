@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'code', 'name'
+    ];
+
+    public function state()
+    {
+        return $this->hasMany(State::class);
+    }
+
+    public function profile(){
+        return $this->hasOne(Profile::class);
+    }
 }

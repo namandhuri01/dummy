@@ -36,3 +36,14 @@ Route::prefix('admin')
     Route::resource('colleges',App\Http\Controllers\Admin\CollegeController::class);
     Route::resource('categories',App\Http\Controllers\Admin\CategoryController::class);
 });
+
+Route::prefix('college')
+        ->name('college.')
+        ->group( function() {
+    Route::get('/login', function () {
+        return view('auth.login');
+    })
+    ->name('login')
+    ->middleware('guest');
+    Route::get('dashboard',[App\Http\Controllers\College\DashboardController::class, 'index'])->name('dashboard.index');
+});

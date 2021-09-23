@@ -16,16 +16,9 @@
             <div class="avatar-info">
                 <img class="profile-img rounded-circle" src="{{ asset('admin-asset/images/1.jpg') }}" alt="profile image">
                 <h4 class="name">@if(Auth::check()){{Auth::user()->first_name}}@endif</h4>
-                <span class="designation">UI/UX EXPERT</span>
             </div>
 
             <ul class="list-unstyled">
-                <li>
-                    <a href="mailto:>@if(Auth::check()){{auth::user()->email}}@endif">
-                        <i class="ion-ios-email-outline"></i>
-                        <span>Emails</span>
-                    </a>
-                </li>
                 <li>
                     <a href="javascript:void(0);">
                         <i class="ion-ios-person-outline"></i>
@@ -62,27 +55,9 @@
 
         <ul class="menu-items custom-scroll">
             <li>
-                <a href="{{route('admin.dashboard.index')}}" class="{{route('admin.dashboard.index') == url()->current() ? 'active' : ''}}">
+                <a href="{{route('college.dashboard.index')}}" class="{{route('college.dashboard.index') == url()->current() ? 'active' : ''}}">
                     <span class="icon-thumbnail"><i class="dripicons-meter"></i></span>
                     <span class="title">Main Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('admin.sub-admins.index')}}" class="{{route('admin.sub-admins.index') == url()->current() ? 'active' : ''}}">
-                    <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
-                    <span class="title">Sub Admins</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('admin.users.index')}}" class="{{route('admin.users.index') == url()->current() ? 'active' : ''}}">
-                    <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
-                    <span class="title">Students</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('admin.colleges.index')}}" class="{{route('admin.colleges.index') == url()->current() ? 'active' : ''}}">
-                    <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
-                    <span class="title">Colleges</span>
                 </a>
             </li>
             <li>

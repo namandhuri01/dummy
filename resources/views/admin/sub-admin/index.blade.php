@@ -18,6 +18,9 @@
                             <li class="breadcrumb-item active">Sub-Admins</li>
                         </ol>
                     </div>
+                    <div class="col-3 col-md-6 col-lg-4">
+                        <a href="{{route('admin.sub-admins.create')}}" class="btn btn-primary btn-round pull-right d-none d-md-block">Add New Sub Admin</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,11 +67,6 @@
                                                     <td>{{$user->email}}</td>
                                                     <td>{{$user->role_id}}</td>
                                                     <td>
-                                                    @if($user->status)
-                                                        <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active" checked  data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios"></td>
-                                                    @else
-                                                        <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active"   data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios">
-                                                    @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

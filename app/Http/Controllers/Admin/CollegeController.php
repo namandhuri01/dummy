@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Hash;
 use App\Models\User;
-use App\Http\Controllers\Controller;
+use App\Models\CollegeDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CollegeRequest;
+use Illuminate\Support\Facades\Password;
 
 class CollegeController extends Controller
 {
@@ -31,7 +36,7 @@ class CollegeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.college.create');
     }
 
     /**
@@ -40,9 +45,28 @@ class CollegeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CollegeRequest $request)
     {
-        //
+        $userData = $request->input();
+        $settingData = $request->input('college_detail');
+    	$userData['role_id'] = config('custom.roles.subadmin');
+    	$userData['password'] =  Hash::make('password');
+        unset($userData['college_detail']);
+
+        DB::transaction(function () use($userData, $settingData) {
+            $user = User::create($userData);
+            $user->profile()->create($settingData);
+
+            // inserting record in user reset password table
+            $token = $this->broker()->createToken($user);
+
+            $url = url(route('password.reset', [
+                'token' => $token,
+                'email' => $user->email,
+            ], false));
+        });
+        $user->notify(new SubAdminAccountNotification($url));
+        return back()->with('success', 'Account created successfully.');
     }
 
     /**
@@ -87,6 +111,12 @@ class CollegeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $college = User::find($id);
+        $college->delete();
+        $notification = array(
+            'message' => 'College deleted Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect(route('admin.colleges.index'))->with($notification);
     }
 }

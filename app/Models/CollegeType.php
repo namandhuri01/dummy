@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CollegeType extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'remark',
+    ];
+    public function CollegeDetail()
+    {
+        return $this->HasOne(CollegeDetail::class);
+    }
 }

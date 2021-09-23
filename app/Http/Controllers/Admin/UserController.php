@@ -52,7 +52,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = User::find($id);
+
+        return view('admin.dashbaord.index');
     }
 
     /**
@@ -86,6 +88,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = User::find($id);
+        $student->delete();
+        $notification = array(
+            'message' => 'Student deleted Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect(route('admin.users.index'))->with($notification);
     }
 }

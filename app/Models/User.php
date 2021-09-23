@@ -45,6 +45,14 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne('App\Models\Role');
+        return $this->hasOne(Role::class);
+    }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+    public function collegeDetail()
+    {
+        return $this->hasOne(CollegeDetail::class);
     }
 }
