@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class CollegeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','CheckUserRole']);
+    }
     /**
      * Display a listing of the resource.
      *

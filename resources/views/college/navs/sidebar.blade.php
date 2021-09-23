@@ -6,7 +6,8 @@
     <!--Navigation Profile area-->
     <div class="navigation-profile">
         <img class="profile-img rounded-circle" src="{{ asset('admin-asset/images/1.jpg') }}" alt="profile image">
-        <h4 class="name">@if(Auth::check()){{Auth::user()->name}}@endif</h4>
+        <h4 class="name">@if(Auth::check()){{Auth::user()->first_name}}@endif</h4>
+        <span class="designation">{{auth()->user()->role}}</span>
 
         <a id="show-user-menu" href="javascript:void(0);" class="circle-white-btn profile-setting"><i class="fa fa-cog"></i></a>
 
@@ -15,9 +16,16 @@
             <div class="avatar-info">
                 <img class="profile-img rounded-circle" src="{{ asset('admin-asset/images/1.jpg') }}" alt="profile image">
                 <h4 class="name">@if(Auth::check()){{Auth::user()->first_name}}@endif</h4>
+                <span class="designation">UI/UX EXPERT</span>
             </div>
 
             <ul class="list-unstyled">
+                <li>
+                    <a href="mailto:>@if(Auth::check()){{auth::user()->email}}@endif">
+                        <i class="ion-ios-email-outline"></i>
+                        <span>Emails</span>
+                    </a>
+                </li>
                 <li>
                     <a href="javascript:void(0);">
                         <i class="ion-ios-person-outline"></i>
@@ -39,6 +47,12 @@
                         @csrf
                     </form>
                 </li>
+                {{-- <li>
+                    <a href="javascript:void(0);">
+                        <i class="ion-log-out"></i>
+                        <span>Logout</span>
+                    </a>
+                </li> --}}
             </ul>
         </div>
     </div>

@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 use Illuminate\Database\Seeder;
 
-class Role extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.

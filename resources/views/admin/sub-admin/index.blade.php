@@ -15,7 +15,7 @@
                     <div class="col-lg-8 d-none d-lg-block">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Students</li>
+                            <li class="breadcrumb-item active">Sub-Admins</li>
                         </ol>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-6">
                         <div class="section-title">
-                            <h4>{{__('Students')}}</h4>
+                            <h4>{{__('Sub-Admins')}}</h4>
                         </div>
                     </div>
 
@@ -50,25 +50,25 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
+                                                <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Role</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($students as $user)
+                                            @foreach($subadmins as $user)
                                                 <tr>
                                                     <td>{{$loop->index+1}}</td>
-                                                    <td class="name">{{$user->first_name}}</td>
-                                                    <td>{{$user->last_name}}</td>
+                                                    <td class="name">{{$user->name}}</td>
                                                     <td>{{$user->email}}</td>
+                                                    <td>{{$user->role_id}}</td>
                                                     <td>
-                                                        @if($user->status)
-                                                            <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active" checked  data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios"></td>
-                                                        @else
-                                                            <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active"   data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios">
-                                                        @endif
+                                                    @if($user->status)
+                                                        <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active" checked  data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios"></td>
+                                                    @else
+                                                        <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active"   data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios">
+                                                    @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

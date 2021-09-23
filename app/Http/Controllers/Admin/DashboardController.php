@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth','CheckUserRole']);
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +25,6 @@ class DashboardController extends Controller
         ->where('role_id', '=', 4)->count();
         $totalRegisteredCollegesMonth = User::whereMonth('created_at', Carbon::now()->month)
         ->where('role_id', '=', 5)->count();
-
         return view('admin.dashboard.index',compact('totalRegisteredStudentsMonth','totalRegisteredCollegesMonth'));
     }
 

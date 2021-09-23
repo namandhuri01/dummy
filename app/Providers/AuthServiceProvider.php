@@ -47,12 +47,12 @@ class AuthServiceProvider extends ServiceProvider
     }
 
     public static $permissions = [
-        'index'     => [1,2,3],
-        'show'      => [1,3],
-        'create'    => [1,2,3],
-        'store'     => [1,2,3],
-        'edit'      => [1,2,3],
-        'update'    => [1,2,3],
+        'index'     => [2,3],
+        'show'      => [3],
+        'create'    => [2,3],
+        'store'     => [2,3],
+        'edit'      => [2,3],
+        'update'    => [2,3],
         'destroy'   => [1],
     ];
 }
