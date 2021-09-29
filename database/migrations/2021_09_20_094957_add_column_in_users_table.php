@@ -15,6 +15,7 @@ class AddColumnInUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('role_id');
+            $table->softDeletesTz('deleted_at');
         });
     }
 
@@ -27,6 +28,7 @@ class AddColumnInUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role_id');
+            $table->dropColumn('deleted_at');
         });
     }
 }

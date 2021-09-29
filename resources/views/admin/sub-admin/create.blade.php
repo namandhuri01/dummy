@@ -55,22 +55,6 @@
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label>Password</label>
-                                            <input class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" type="password" required>
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Confirm Password</label>
-                                            <input class="form-control" placeholder="Confirm password" name="password_confirmation" type="password" required autocomplete="new-password">
-                                            <div class="invalid-feedback">This field is requires</div>
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <label>Select Role</label>
                                         <select class="custom-select form-control @error('role_id') is-invalid @enderror" name="role_id" required>

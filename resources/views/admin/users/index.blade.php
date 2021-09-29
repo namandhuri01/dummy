@@ -50,8 +50,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
+                                                <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Action</th>
                                             </tr>
@@ -60,8 +59,7 @@
                                             @foreach($students as $user)
                                                 <tr>
                                                     <td>{{$loop->index+1}}</td>
-                                                    <td class="name">{{$user->first_name}}</td>
-                                                    <td>{{$user->last_name}}</td>
+                                                    <td class="name">{{$user->name}}</td>
                                                     <td>{{$user->email}}</td>
                                                     <td>
                                                         @if($user->status)

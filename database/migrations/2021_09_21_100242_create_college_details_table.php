@@ -16,6 +16,7 @@ class CreateCollegeDetailsTable extends Migration
         Schema::create('college_details', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->string('college_name');
             $table->bigInteger('college_type_id');
             $table->string('contact_person_name');
             $table->string('contact_number');

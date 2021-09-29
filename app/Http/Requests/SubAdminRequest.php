@@ -28,13 +28,11 @@ class SubAdminRequest extends FormRequest
         $createRules = [
             'name'       => 'bail|required|string',
             'email'      => 'bail|required|string|unique:users',
-            'password'   => 'bail|required|string|min:8, confirmed',
             'role_id'    => 'bail|required|integer',
         ];
         $updateRules = [
             'name'       => 'bail|required|string',
             'email'      => 'bail|required|string|unique:users,email',
-            'password'   => 'bail|required|string|min:8, confirmed',
             'role_id'    => 'bail|required|integer',
         ];
         return ($this->method() == 'PUT') ? $updateRules : $createRules;

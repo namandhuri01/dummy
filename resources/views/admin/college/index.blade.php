@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Users')
+@section('title', 'College')
 @section('content')
     <!--Page Container-->
 <section class="page-container">
@@ -17,6 +17,9 @@
                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard.index')}}">Dashboard</a></li>
                             <li class="breadcrumb-item active">{{__('Colleges')}}</li>
                         </ol>
+                    </div>
+                    <div class="col-3 col-md-6 col-lg-4">
+                        <a href="{{route('admin.colleges.create')}}" class="btn btn-primary btn-round pull-right d-none d-md-block">Add New College</a>
                     </div>
                 </div>
             </div>
@@ -50,26 +53,46 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Action</th>
+                                                <th>College Name</th>
+                                                <th>Address{{getDiffBwTwoDates("2019-01-01","2021-09-28")}}</th>
+                                                <th>Action {{convertNumberIntoWords(125550)}}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($colleges as $user)
                                                 <tr>
                                                     <td>{{$loop->index+1}}</td>
-                                                    <td class="name">{{$user->first_name}}</td>
-                                                    <td>{{$user->last_name}}</td>
+                                                    <td class="name">{{$user->name}}</td>
                                                     <td>{{$user->email}}</td>
-                                                    <td>
-                                                    @if($user->status)
-                                                        <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active" checked  data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios"></td>
-                                                    @else
-                                                        <input type="checkbox"  data-user-id="{{$user->hash_id}}" name="status" class="userStatus" data-off="Inactive" data-on="Active"   data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-style="ios">
-                                                    @endif
-                                                    </td>
+                                                    <td class="d-flex">
+														@if(!$user->deleted_at)
+							                          		<form action="{{ route('admin.colleges.destroy',[ 'college' => $user->id ]) }}" method="POST">
+															  	{{ csrf_field() }}
+															  	{{ method_field('DELETE') }}
+							                          			<a href="#">
+							                          				<i class="fa fa-trash" data-message="delete">
+							                          					Delete
+							                          				</i>
+							                          			</a>
+															</form>
+														@else
+							                          		<form action="{{ route('admin.colleges.destroy',[ 'college' => $user->id ]) }}" method="POST">
+															  	{{ csrf_field() }}
+															  	{{ method_field('DELETE') }}
+							                          			<a href="#">
+							                          				<i class="fa fa-undo text-danger" data-message="restore">
+							                          					Restore
+							                          				</i>
+							                          			</a>
+															</form>
+														@endif
+														<a class="ml-3" href="{{ route('admin.colleges.show', [ 'college'=> $user->id ]) }}" >
+					                          				<i class="fa fa-eye"></i> View
+														  </a>
+														  <a class="ml-3" href="{{ route('admin.colleges.edit', [ 'college'=> $user->id ]) }}" >
+															<i class="fa fa-pencil"></i> Edit
+														</a>
+						                          	</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

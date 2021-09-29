@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function getState(Request $request){
+        // dd($request->all());
+        $states = \App\Models\State::where('country_id', $request->country_id)->get();
+        return response()->json(['data' => $states]);
+    }
 }

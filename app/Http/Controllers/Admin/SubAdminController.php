@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubAdminRequest;
+use App\Notifications\CollegeAccountNotification;
 
 class SubAdminController extends Controller
 {
@@ -27,14 +28,24 @@ class SubAdminController extends Controller
     }
     public function store(SubAdminRequest $request)
     {
-        $subadmin = User::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password),
-            'role_id'   => $request->role_id,
-        ]);
+        $userData = $request->input();
+    	$userData['password'] =  Hash::make('password');
+
+        DB::transaction(function () use($userData, $settingData) {
+            $user = User::create($userData);
+            $user->collegeDetail()->create($settingData);
+
+            // inserting record in user reset password table
+            $token = $this->broker()->createToken($user);
+
+            $url = url(route('password.reset', [
+                'token' => $token,
+                'email' => $user->email,
+            ], false));
+        });
+        $user->notify(new CollegeAccountNotification($url));
         $notification = array(
-            'message' => 'Sub Admin Created Successfully!',
+            'message' => 'Account created successfully.!',
             'alert-type' => 'success'
         );
         return redirect(route('admin.sub-admins.index'))->with($notification);

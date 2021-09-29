@@ -19,28 +19,33 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::post('/state', [App\Http\Controllers\HomeController::class, 'getState'])->name('get.state');
 
 Route::prefix('admin')
-        ->name('admin.')
-        ->group( function() {
-    // Route::get('/login', function () {
-    //     return view('auth.login');
-    // })
-    // ->name('login')
-    // ->middleware('guest');
+    ->name('admin.')
+    ->group( function() {
+        Route::get('/', function () {
+            return view('auth.login');
+        })
+        ->name('login')
+        ->middleware('guest');
 
+    Route::get('/state',[App\Http\Controllers\Admin\UserController::class, 'getState'])->name('get.state');
     Route::get('dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('users',App\Http\Controllers\Admin\UserController::class);
     Route::resource('sub-admins',App\Http\Controllers\Admin\SubAdminController::class);
     Route::resource('colleges',App\Http\Controllers\Admin\CollegeController::class);
     Route::resource('categories',App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('college-type',App\Http\Controllers\Admin\CollegeTypeController::class);
+    Route::get('College-ceate', function(){
+        return view('admin.college.create-new');
+    });
 });
 
 Route::prefix('college')
-        ->name('college.')
-        ->group( function() {
-    Route::get('/login', function () {
+    ->name('college.')
+    ->group( function() {
+    Route::get('/', function () {
         return view('auth.login');
     })
     ->name('login')
