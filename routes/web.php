@@ -38,9 +38,7 @@ Route::prefix('admin')
     Route::resource('colleges',App\Http\Controllers\Admin\CollegeController::class);
     Route::resource('categories',App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('college-type',App\Http\Controllers\Admin\CollegeTypeController::class);
-    Route::get('College-ceate', function(){
-        return view('admin.college.create-new');
-    });
+    Route::resource('courses',App\Http\Controllers\Admin\CourseController::class);
 });
 
 Route::prefix('college')

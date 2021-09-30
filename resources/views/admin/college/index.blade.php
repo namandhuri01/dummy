@@ -53,17 +53,30 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>Logo</th>
                                                 <th>College Name</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Number</th>
+                                                <th>College Type</th>
                                                 <th>Address</th>
                                                 <th>Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($colleges as $user)
+                                                <?php
+                                                    $collegeDetail = $user->collegeDetail ? $user->collegeDetail : [];
+                                                ?>
                                                 <tr>
                                                     <td>{{$loop->index+1}}</td>
-                                                    <td class="name">{{$user->name}}</td>
-                                                    <td>{{$user->email}}</td>
+                                                    <td><img src="{{$user->collegeDetail->thumb_logo}}" width="30" height="30" class="img-responsive "></td>
+                                                    <td class="name">{{($user->collegeDetail) ? $user->collegeDetail->college_name : ''}}</td>
+                                                    <td>{{($user->collegeDetail) ? $user->collegeDetail->contact_person_name : ''}}</td>
+                                                    <td>{{($user->collegeDetail) ? $user->collegeDetail->email : ''}}</td>
+                                                    <td>{{($user->collegeDetail) ? $user->collegeDetail->contact_number : ''}}</td>
+                                                    <td>{{($user->collegeDetail) ? $user->collegeDetail->collegeType->name : ''}}</td>
+                                                    <td>{{($user->collegeDetail) ? $user->collegeDetail->full_address : ''}}</td>
                                                     <td class="d-flex">
 														@if(!$user->deleted_at)
 							                          		<form action="{{ route('admin.colleges.destroy',[ 'college' => $user->id ]) }}" method="POST">

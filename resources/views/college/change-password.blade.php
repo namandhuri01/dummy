@@ -73,5 +73,5 @@
 
 @push('scripts')
 
-    <script type="text/javascript" src="{{ asset('js/change-password.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/common/change-password/change-password.js') }}"></script>
 @endpush

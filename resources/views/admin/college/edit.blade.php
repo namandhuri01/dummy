@@ -4,9 +4,7 @@
     <!--Page Container-->
     <section class="page-container">
         <?php
-
             $collegeDetail = $user->collegeDetail ? $user->collegeDetail : [];
-
         ?>
         <div class="page-content-wrapper">
             <!--Header Fixed-->
@@ -40,7 +38,7 @@
 
                         <div class="col-12">
                             <div class="block form-block mb-4">
-                                <form id="college-create" action="{{route('admin.colleges.update',$user->id)}}" method="post" enctype="multipart/form-data">
+                                <form id="college-edit" action="{{route('admin.colleges.update',$user->id)}}" method="post" enctype="multipart/form-data">
                                     @method('put')
                                     @csrf
 
@@ -77,11 +75,11 @@
                                         </div>
                                         <div class="form-group col-6">
                                             <label>Select College Type <span class="text-danger">*</span></label>
-                                            <?php $type_id = $collegeDetail->type_id ?? '';?>
+                                            <?php $type_id = $collegeDetail->college_type_id ?? '';?>
                                             <select class="custom-select form-control @error('college_detail.college_type_id') is-invalid @enderror" name="college_detail[college_type_id]" required>
                                                 <option value="">Select Type</option>
                                                 @foreach ($collegeType as $type )
-                                                    <option value="{{$type->id}}" {{$type_id == $type->id ? 'selected': ''}}>{{$type->name}}</option>
+                                                    <option value="{{$type->id}}" {{$type_id == $type->id ? 'selected': ''}} {{$type->id}}{{$type_id}}>{{$type->name}}</option>
                                                @endforeach
                                             </select>
                                             @error('college_detail.college_type_id')
@@ -258,7 +256,8 @@
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label for="collegeAbout">About College  <span class="text-danger">*</span></label>
-                                            <textarea  class="form-control" id="collegeAbout" name="college_detail[about]" placeholder="About College"></textarea>
+                                            <?php $about = $collegeDetail->about ?? '';?>
+                                            <textarea  class="form-control" id="collegeAbout" name="college_detail[about]" placeholder="About College">{!! $about!!}</textarea>
                                             @error('college_detail.about')
                                                 <label for="collegeAbout" id="collegeAbout-error" class="error" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -267,7 +266,8 @@
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="collegeAchivment">Collge Achivements  <span class="text-danger">*</span></label>
-                                            <textarea class="form-control" id="collegeAchivment" name="college_detail[achivment]" placeholder="College Achivements"></textarea>
+                                            <?php $achivment = $collegeDetail->achivment ?? '';?>
+                                            <textarea class="form-control" id="collegeAchivment" name="college_detail[achivment]" placeholder="College Achivements">{!!$achivment!!}</textarea>
                                             @error('college_detail.achivment')
                                                 <label for="collegeAchivment" id="collegeAchivment-error" class="error" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -279,7 +279,8 @@
                                     <div class="row">
                                         <div class="form-group col-6">
                                             <label for="authorize_body">Authorize Body  <span class="text-danger">*</span></label>
-                                            <textarea   class="form-control" id="authorize_body" name="college_detail[authorize_body]" placeholder="College ISO Details"></textarea>
+                                            <?php $authorize_body = $collegeDetail->authorize_body ?? '';?>
+                                            <textarea   class="form-control" id="authorize_body" name="college_detail[authorize_body]" placeholder="College ISO Details">{!!$authorize_body!!}</textarea>
                                             @error('college_detail.authorize_body')
                                                 <label for="authorize_body" id="authorize_body-error" class="error" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -288,7 +289,8 @@
                                         </div>
                                         <div class="form-group  col-6">
                                             <label for="collegeISO">College ISO Details  <span class="text-danger">*</span></label>
-                                            <textarea   class="form-control" id="collegeISO" name="college_detail[iso_detail]" placeholder="College ISO Details"></textarea>
+                                            <?php $iso_detail = $collegeDetail->iso_detail ?? '';?>
+                                            <textarea   class="form-control" id="collegeISO" name="college_detail[iso_detail]" placeholder="College ISO Details">{!!$iso_detail!!}</textarea>
                                             @error('college_detail.iso_detail')
                                                 <label for="collegeISO" id="collegeISO-error" class="error" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -299,82 +301,83 @@
                                     <div class="row">
                                         <div class="form-group border-bottom py-4 mb-0">
                                             <label for="">College Added For</label><span class="required">*</span>
+                                            <?php $added_for =unserialize($collegeDetail->added_for) ?? ''; ?>
                                             <div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox" id="Management"   name="added_for[]"  value="management">
+                                                    <input class="form-check-input" type="checkbox" id="Management"   name="added_for[]"  value="management" {{in_array_r("management", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Management">Management</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox" id="Engineering"   name="added_for[]"  value="engineering">
+                                                    <input class="form-check-input" type="checkbox" id="Engineering"   name="added_for[]"  value="engineering" {{in_array_r("engineering", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Engineering">Engineering</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" id="Medical" name="added_for[]" value="medical">
+                                                    <input class="form-check-input"  type="checkbox" id="Medical" name="added_for[]" value="medical" {{in_array_r("medical", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label"  for="Medical">Medical</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="Law" id="law">
+                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="law" id="law" {{in_array_r("law", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Law">Law</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" name="added_for" value="arts" id="Arts">
+                                                    <input class="form-check-input"  type="checkbox" name="added_for" value="arts" id="Arts" {{in_array_r("arts", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Arts">Arts & Science</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="commerece" id="Commerece">
+                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="commerece" id="Commerece" {{in_array_r("commerece", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Commerece">Commerce</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"   type="checkbox" name="added_for[]" value="education"  id="Education" >
+                                                    <input class="form-check-input"   type="checkbox" name="added_for[]" value="education"  id="Education" {{in_array_r("education", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Education">Education </label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="design" id="Design">
+                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="design" id="Design" {{in_array_r("design", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Design">Design </label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="paramedical" id="Paramedical">
+                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="paramedical" id="Paramedical" {{in_array_r("paramedical", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Paramedical">Paramedical</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"   type="checkbox" name="added_for[]" value="hotel-management"  id="Hotel Management" >
+                                                    <input class="form-check-input"   type="checkbox" name="added_for[]" value="hotel-management"  id="Hotel Management" {{in_array_r("hotel-management", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Hotel Management">Hotel Management</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="computer-application"  id="Computer Application" >
+                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="computer-application"  id="Computer Application" {{in_array_r("computer-application", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Computer Application">Computer Application</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox"   name="added_for[]"  value="agriculture" id="Agriculture">
+                                                    <input class="form-check-input" type="checkbox"   name="added_for[]"  value="agriculture" id="Agriculture" {{in_array_r("agriculture", $added_for) ? 'checked' : ''}}>
 
                                                     <label class="form-check-label" for="Agriculture">Agriculture</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox"   name="added_for[]"  value="pharmacy" id="Pharmacy">
+                                                    <input class="form-check-input" type="checkbox"   name="added_for[]"  value="pharmacy" id="Pharmacy" {{in_array_r("pharmacy", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Pharmacy">Pharmacy</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="vocational-course" id="Vocational Course">
+                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="vocational-course" id="Vocational Course" {{in_array_r("vocational-course", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Vocational Course">Vocational Course</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="mass-communication" id="Mass Communication">
+                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="mass-communication" id="Mass Communication" {{in_array_r("mass-communication", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Mass Communication">Mass Communication</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="veterinary-science" id="Veterinary Science">
+                                                    <input class="form-check-input" type="checkbox" name="added_for[]" value="veterinary-science" id="Veterinary Science" {{in_array_r("veterinary-science", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Veterinary Science">Veterinary Science</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"   type="checkbox" name="added_for[]" value="architecture"  id="Architecture">
+                                                    <input class="form-check-input"   type="checkbox" name="added_for[]" value="architecture"  id="Architecture" {{in_array_r("architecture", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Architecture">Architecture</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="dental" id="Dental">
+                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="aviation" id="Dental" {{in_array_r("aviation", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Dental">Dental</label>
                                                 </div>
                                                 <div class="form-check form-check-inline1">
-                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="aviation" id="Aviation">
+                                                    <input class="form-check-input"  type="checkbox" name="added_for[]" value="aviation" id="Aviation" {{in_array_r("aviation", $added_for) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="Aviation">Aviation</label>
                                                 </div>
                                             </div>
@@ -383,7 +386,7 @@
                                     <div class="row">
                                         <div class="col-3 form-group">
                                             <label for="broucher">Broucher  <span class="text-danger">*</span></label><br>
-                                             <input type="file" name="broucher" required/>
+                                             <input type="file" name="broucher"/>
                                              @error('broucher')
                                                 <label for="broucher" id="broucher-error" class="error" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -393,7 +396,7 @@
                                         <div class="form-group col-3">
                                             <label for="logo">College Logo (25x25)  <span class="text-danger">*</span></label>
                                             <div class="col-md-8">
-                                                <input type="file"  name="logo" required />
+                                                <input type="file"  name="logo" />
                                             </div>
                                             @error('logo')
                                                 <label for="logo" id="logo-error" class="error" role="alert">
@@ -403,7 +406,7 @@
                                         </div>
                                         <div class="form-group col-3">
                                             <label for="cover_image">Cover Photo (1400x200)  <span class="text-danger">*</span></label>
-                                            <input type="file" name="cover_image" required />
+                                            <input type="file" name="cover_image" />
                                             @error('cover_image')
                                                 <label for="cover_image" id="cover_image-error" class="error" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -412,7 +415,7 @@
                                         </div>
                                         <div class="form-group col-3">
                                             <label for="card_image">College Card Photo  <span class="text-danger">*</span></label>
-                                            <input type="file" name="card_image" required />
+                                            <input type="file" name="card_image" />
                                             @error('card_image')
                                                 <label for="card_image" id="card_image-error" class="error" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -449,7 +452,7 @@
         }
         $('#Country').on('change', function() {
             var country_id = $(this).val();
-            var token = $('#college-create input[name="_token"]').val();
+            var token = $('#college-edit input[name="_token"]').val();
             $.ajax({
                 type:"post",
                 url : '{{route("get.state")}}',
@@ -475,96 +478,8 @@
     });
 </script>
     <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
-    <script type="text/javascript">
-        ClassicEditor
-        .create( document.querySelector( '#authorize_body'), {
-            toolbar: ['heading','|','alignment','bold','italic','link','bulletedList','numberedList','blockQuote','undo',
-            'redo' ],
-            heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                    { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                    { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                    { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-                ]
-            }
-        } )
-        .then( editor => {
-            console.log( 'Editor was initialized', editor );
-        } )
-        .catch( error => {
-            console.error( error.stack );
-        } );
-        ClassicEditor
-        .create( document.querySelector( '#collegeISO'), {
-            toolbar: ['heading','|','alignment','bold','italic','link','bulletedList','numberedList','blockQuote','undo',
-            'redo' ],
-            heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                    { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                    { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                    { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-                ]
-            }
-        } )
-        .then( editor => {
-            console.log( 'Editor was initialized', editor );
-        } )
-        .catch( error => {
-            console.error( error.stack );
-        } );
-        ClassicEditor
-        .create( document.querySelector( '#collegeAbout'), {
-            toolbar: ['heading','|','alignment','bold','italic','link','bulletedList','numberedList','blockQuote','undo',
-            'redo' ],
-            heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                    { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                    { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                    { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-                ]
-            }
-        } )
-        .then( editor => {
-            console.log( 'Editor was initialized', editor );
-        } )
-        .catch( error => {
-            console.error( error.stack );
-        } );
-        ClassicEditor
-        .create( document.querySelector( '#collegeAchivment'), {
-            toolbar: ['heading','|','alignment','bold','italic','link','bulletedList','numberedList','blockQuote','undo',
-            'redo' ],
-            heading: {
-                options: [
-                    { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                    { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                    { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                    { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                    { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                    { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                    { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-                ]
-            }
-        } )
-        .then( editor => {
-            console.log( 'Editor was initialized', editor );
-        } )
-        .catch( error => {
-            console.error( error.stack );
-        } );
-    </script>
+    <script src="{{asset('js/common/college/ckeditor-ini.js')}}"></script>
+    <script src="{{asset('js/common/college/college-edit.js')}}"></script>
 
 @endpush
 

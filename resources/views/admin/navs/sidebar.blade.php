@@ -54,23 +54,60 @@
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.sub-admins.index')}}" class="{{route('admin.sub-admins.index') == url()->current() ? 'active' : ''}}">
-                    <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
-                    <span class="title">Sub Admins</span>
+                <a href="javascript:void(0);" class="have-submenu">
+                    <span class="icon-thumbnail"><i class="dripicons-graph-bar"></i></span>
+                    <span class="title">College Managment</span>
                 </a>
+                <!--Submenu-->
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{route('admin.college-type.index')}}"  class="{{route('admin.college-type.index') == url()->current() ? 'active' : ''}}">
+                            <span class="icon-thumbnail"><i class="dripicons-graph-line"></i></span>
+                            <span class="title">College Type</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.colleges.index')}}" class="{{route('admin.colleges.index') == url()->current() ? 'active' : ''}}">
+                            <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
+                            <span class="title">Colleges</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.categories.index')}}" class="{{route('admin.categories.index') == url()->current() ? 'active' : ''}}">
+                            <span class="icon-thumbnail"><i class="dripicons-graph-pie"></i></span>
+                            <span class="title">Categories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.courses.index')}}" class="{{route('admin.courses.index') == url()->current() ? 'active' : ''}}">
+                            <span class="icon-thumbnail"><i class="dripicons-graph-pie"></i></span>
+                            <span class="title">Courses</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
-                <a href="{{route('admin.users.index')}}" class="{{route('admin.users.index') == url()->current() ? 'active' : ''}}">
-                    <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
-                    <span class="title">Students</span>
+                <a href="javascript:void(0);" class="have-submenu">
+                    <span class="icon-thumbnail"><i class="dripicons-graph-bar"></i></span>
+                    <span class="title">User Managment</span>
                 </a>
+                <!--Submenu-->
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{route('admin.sub-admins.index')}}" class="{{route('admin.sub-admins.index') == url()->current() ? 'active' : ''}}">
+                            <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
+                            <span class="title">Sub Admins</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.users.index')}}" class="{{route('admin.users.index') == url()->current() ? 'active' : ''}}">
+                            <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
+                            <span class="title">Students</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <a href="{{route('admin.colleges.index')}}" class="{{route('admin.colleges.index') == url()->current() ? 'active' : ''}}">
-                    <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
-                    <span class="title">Colleges</span>
-                </a>
-            </li>
+
             <li>
                 <a href="dashboard_tasks-list.html">
                     <span class="icon-thumbnail"><i class="dripicons-list"></i></span>

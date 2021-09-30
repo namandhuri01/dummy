@@ -94,7 +94,7 @@
         <script type="text/javascript" src="{{ asset('admin-asset/plugins/data-tables/datatables.min.js') }}"></script>
         <!--Editable JS-->
         <script type="text/javascript" src="{{ asset('admin-asset/plugins/editable/editable.js') }}"></script>
-
+        {{-- <script src="{{asset('js/jquery.min.js')}}"></script> --}}
         <!--- Main JS -->
         <script src="{{ asset('admin-asset/js/main.js') }}"></script>
         {{-- Toastr  --}}

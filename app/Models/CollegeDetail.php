@@ -18,7 +18,7 @@ class CollegeDetail extends Model
     protected $casts = [
         'added_for' => 'array',
     ];
-    protected $appends = ['thumb_logo','banner'];
+    protected $appends = ['thumb_logo','banner','full_address'];
 
     public function getThumbLogoAttribute(){
         if($this->logo)
@@ -42,6 +42,10 @@ class CollegeDetail extends Model
             }
         }
         return url('images/banner/VIaL8H.jpg') ;
+    }
+    public function getFullAddressAttribute()
+    {
+        return ucwords($this->address).', '.$this->city.', '.$this->state->name.', '.$this->country->name;
     }
     public function user()
     {

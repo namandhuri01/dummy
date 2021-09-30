@@ -138,6 +138,7 @@ class CollegeController extends Controller
      */
     public function update(CollegeRequest $request, $id)
     {
+        // dd(serialize($request->added_for));
         $settingData   = $request->input('college_detail');
         $facilites = explode(',', $request->facilites);
         $settingData['facilites'] = serialize($facilites);
@@ -160,7 +161,7 @@ class CollegeController extends Controller
             $settingData['card_image'] = $this->cardImage($request,$user);
         }
 
-        $user->collegeDetail()->create($settingData);
+        $user->collegeDetail()->updateOrCreate(['user_id' => $id],$settingData);
         $notification = array(
             'message' => 'Account created successfully.!',
             'alert-type' => 'success'
