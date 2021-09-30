@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-lg-12">
                         <div class="card-body food-order-tab px-0">
                             <ul class="nav nav-pills border-b-0">
@@ -47,29 +47,29 @@
                                                                     {{
                                                                         ($user->collegeDetail)
                                                                         ?
-                                                                            $user->name
+                                                                            $user->collegeDetail->college_name
                                                                         :"N/A"
                                                                     }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Business Email</td>
+                                                                <td>College Email</td>
                                                                 <td>
                                                                     {{
                                                                         ($user->collegeDetail)
                                                                         ?
-                                                                            $user->collegeDetail
+                                                                        $user->collegeDetail->email
                                                                         :"N/A"
                                                                     }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Phone no:</td>
+                                                                <td>Contact Person Name</td>
                                                                 <td>
                                                                     {{
                                                                         ($user->collegeDetail)
                                                                         ?
-                                                                            $user->college_detail
+                                                                            $user->collegeDetail->contact_person_name
                                                                         :"N/A"
                                                                     }}
                                                                 </td>
@@ -80,7 +80,7 @@
                                                                     {{
                                                                         ($user->collegeDetail)
                                                                         ?
-                                                                            $user->college_detail
+                                                                            $user->collegeDetail->address
                                                                         :"N/A"
                                                                     }}
                                                                 </td>
@@ -91,7 +91,7 @@
                                                                     {{
                                                                         ($user->collegeDetail)
                                                                         ?
-                                                                            $user->college_detail
+                                                                            $user->collegeDetail->state->name
                                                                         :"N/A"
                                                                     }}
                                                                 </td>
@@ -102,7 +102,7 @@
                                                                     {{
                                                                         ($user->collegeDetail)
                                                                         ?
-                                                                            $user->college_detail
+                                                                            $user->collegeDetail->country->name
                                                                         :"N/A"
                                                                     }}
                                                                 </td>
@@ -113,39 +113,7 @@
                                                                     {{
                                                                         ($user->collegeDetail)
                                                                         ?
-                                                                            $user->college_detail
-                                                                        :"N/A"
-                                                                    }}
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="details-info">
-                                                    <h3> Food Details</h3>
-
-                                                    <table class="table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Min Order:</td>
-                                                                <td>
-                                                                    {{
-                                                                        ($user->collegeDetail)
-                                                                        ?
-                                                                            $user->college_detail
-                                                                        :"N/A"
-                                                                    }}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Description:</td>
-                                                                <td>
-                                                                    {{
-                                                                        ($user->collegeDetail)
-                                                                        ?
-                                                                            $user->college_detail
+                                                                            $user->collegeDetail
                                                                         :"N/A"
                                                                     }}
                                                                 </td>
@@ -242,7 +210,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <!-- <div class="bg-white p-4 mt-4 shadow-sm">
             </div> -->

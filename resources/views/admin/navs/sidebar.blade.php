@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="user_change-password.html">
+                    <a href="{{route('admin.change-password.index')}}">
                         <i class="ion-ios-locked-outline"></i>
                         <span>Change Password</span>
                     </a>

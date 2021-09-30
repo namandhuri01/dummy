@@ -27,7 +27,7 @@ class CollegeController extends Controller
      */
     public function index()
     {
-        $colleges = User::where('role_id', '=',5)->paginate(15);
+        $colleges = User::where('role_id', '=',5)->withTrashed()->sortable(['deleted_at' => 'IS Null'])->paginate(15);;
 
         return view('admin.college.index',compact('colleges'));
     }
@@ -136,17 +136,14 @@ class CollegeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CollegeRequest $request, $id)
     {
-         // dd($request->all());
         $settingData   = $request->input('college_detail');
         $facilites = explode(',', $request->facilites);
         $settingData['facilites'] = serialize($facilites);
         $settingData['added_for'] = serialize($request->added_for);
-        // unset($userData['college_detail']);
 
         $settingData['slug'] = Str::slug($settingData['college_name']);
-            // $user = User::create($userData);
         $user = User::find($id);
 
         if($request->file('broucher')) {
@@ -163,11 +160,7 @@ class CollegeController extends Controller
             $settingData['card_image'] = $this->cardImage($request,$user);
         }
 
-
-
         $user->collegeDetail()->create($settingData);
-            // inserting record in user reset password table
-
         $notification = array(
             'message' => 'Account created successfully.!',
             'alert-type' => 'success'
@@ -183,8 +176,14 @@ class CollegeController extends Controller
      */
     public function destroy($id)
     {
-        $college = User::find($id);
-        $college->delete();
+        $user = User::withTrashed()->find($id);
+        $message='deactivated';
+        if($user->trashed()) {
+            $user->restore();
+            $message="activated";
+        } else{
+            $user->delete();
+        }
         $notification = array(
             'message' => 'College deleted Successfully!',
             'alert-type' => 'success'

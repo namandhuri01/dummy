@@ -81,20 +81,6 @@
         <!--Modernizr Js-->
         <script type="text/javascript" src="{{ asset('admin-asset/js/modernizr.custom.js') }}"></script>
 
-        <!--Morphin Search JS-->
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/morphin-search/classie.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/morphin-search/morphin-search.js') }}"></script>
-        <!--Morphin Search JS-->
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/preloader/pathLoader.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/preloader/preloader-main.js') }}"></script>
-
-        <!--Chart js-->
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/charts/Chart.min.js') }}"></script>
-
-        <!--Sparkline Chart Js-->
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/sparkline/jquery.charts-sparkline.js') }}"></script>
-
         <!--Custom Scroll-->
         <script type="text/javascript" src="{{ asset('admin-asset/plugins/customScroll/jquery.mCustomScrollbar.min.js') }}"></script>
         <!--Sortable Js-->
@@ -104,14 +90,10 @@
         <!--Date Range JS-->
         <script type="text/javascript" src="{{ asset('admin-asset/plugins/date-range/moment.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('admin-asset/plugins/date-range/daterangepicker.js') }}"></script>
-        <!--CK Editor JS-->
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/ckEditor/ckeditor.js') }}"></script>
         <!--Data-Table JS-->
         <script type="text/javascript" src="{{ asset('admin-asset/plugins/data-tables/datatables.min.js') }}"></script>
         <!--Editable JS-->
         <script type="text/javascript" src="{{ asset('admin-asset/plugins/editable/editable.js') }}"></script>
-        <!--Full Calendar JS-->
-        <script type="text/javascript" src="{{ asset('admin-asset/plugins/full-calendar/fullcalendar.min.js') }}"></script>
 
         <!--- Main JS -->
         <script src="{{ asset('admin-asset/js/main.js') }}"></script>
@@ -122,7 +104,7 @@
         {{-- live search --}}
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-
+        <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
         <!-- (Optional) Latest compiled and minified JavaScript translation files -->
         {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script> --}}
         <script>

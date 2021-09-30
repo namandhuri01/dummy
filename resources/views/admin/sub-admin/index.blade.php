@@ -65,9 +65,36 @@
                                                     <td>{{$loop->index+1}}</td>
                                                     <td class="name">{{$user->name}}</td>
                                                     <td>{{$user->email}}</td>
-                                                    <td>{{$user->role_id}}</td>
-                                                    <td>
-                                                    </td>
+                                                    <td>{{$user->role_name}}</td>
+                                                    <td class="d-flex">
+														@if(!$user->deleted_at)
+							                          		<form action="{{ route('admin.sub-admins.destroy',['sub_admin' => $user->id ]) }}" method="POST">
+															  	{{ csrf_field() }}
+															  	{{ method_field('DELETE') }}
+							                          			<a href="#">
+							                          				<i class="fa fa-trash" data-message="delete">
+							                          					Delete
+							                          				</i>
+							                          			</a>
+															</form>
+														@else
+							                          		<form action="{{ route('admin.sub-admins.destroy',[ 'sub_admin' => $user->id ]) }}" method="POST">
+															  	{{ csrf_field() }}
+															  	{{ method_field('DELETE') }}
+							                          			<a href="#">
+							                          				<i class="fa fa-undo text-danger" data-message="restore">
+							                          					Restore
+							                          				</i>
+							                          			</a>
+															</form>
+														@endif
+														<a class="ml-3" href="{{ route('admin.sub-admins.show', [ 'sub_admin'=> $user->id ]) }}" >
+					                          				<i class="fa fa-eye"></i> View
+														  </a>
+														  <a class="ml-3" href="{{ route('admin.sub-admins.edit', [ 'sub_admin'=> $user->id ]) }}" >
+															<i class="fa fa-pencil"></i> Edit
+														</a>
+						                          	</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -83,35 +110,13 @@
 </section>
 @endsection
 @push('script')
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-<script>
-$.ajaxSetup({
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-    }
-});
-$(".userStatus").change(function () {
-    var mode = $(this).prop("checked");
-    var userId = $(this).attr("data-user-id");
-    $.ajax({
-        type: "POST",
-        dataType: "JSON",
-        url: "/admin/update/status",
-        data: {
-            mode: mode,
-            userId: userId
-        },
-        success: function (data) {
-            var data = eval(data);
-        }
-    });
-});
-</script>
-@endpush
-@push('css')
-    <style>
-    .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-    .toggle.ios .toggle-handle { border-radius: 20px; }
-    </style>
+	<script type="text/javascript">
+		$('.fa-trash, .fa-undo').on('click', function(e){
+			let msg = $(this).attr('data-message');
+			let form = $(this).closest('form');
+			if(confirm(`Are you sure want to ${msg} this client?`)) {
+				form.submit();
+			}
+		});
+	</script>
 @endpush

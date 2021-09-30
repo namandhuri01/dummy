@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $students = User::where('role_id', '=', 4)->paginate(15);
+        $students = User::where('role_id', '=', 4)->withTrashed()->sortable(['deleted_at' => 'IS Null'])->paginate(15);;
         return view('admin.users.index',compact('students'));
     }
 
@@ -88,8 +88,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $student = User::find($id);
-        $student->delete();
+        $user = User::withTrashed()->find($id);
+        $message='deactivated';
+        if($user->trashed()) {
+            $user->restore();
+            $message="activated";
+        } else{
+            $user->delete();
+        }
         $notification = array(
             'message' => 'Student deleted Successfully!',
             'alert-type' => 'success'

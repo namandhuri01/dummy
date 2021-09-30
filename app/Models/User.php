@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'role_id',
     ];
-
+    protected $appends = ['role_name'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -44,10 +44,26 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    public function getRoleNameAttribute(){
+        if($this->role_id == 1){
+            return 'Admin';
+        }
+        if($this->role_id == 2){
+    	    return 'Editor';
+        }
+        if($this->role_id == 3){
+		    return 'Manager';
+        }
+        if($this->role_id == 4){
+		    return 'Student';
+        }
+        if($this->role_id == 5){
+            return 'College';
+        }
+    }
     public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
     public function profile()
     {

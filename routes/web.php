@@ -29,7 +29,8 @@ Route::prefix('admin')
         })
         ->name('login')
         ->middleware('guest');
-
+    Route::get('/change-password',[App\Http\Controllers\Admin\ChangePasswordController::class, 'index'])->name('change-password.index');
+    Route::post('/change-password',[App\Http\Controllers\Admin\ChangePasswordController::class, 'store'])->name('change-password.store');
     Route::get('/state',[App\Http\Controllers\Admin\UserController::class, 'getState'])->name('get.state');
     Route::get('dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
     Route::resource('users',App\Http\Controllers\Admin\UserController::class);
@@ -50,5 +51,7 @@ Route::prefix('college')
     })
     ->name('login')
     ->middleware('guest');
+    Route::get('/change-password',[App\Http\Controllers\College\ChangePasswordController::class, 'index'])->name('change-password.index');
+    Route::post('/change-password',[App\Http\Controllers\College\ChangePasswordController::class, 'store'])->name('change-password.store');
     Route::get('dashboard',[App\Http\Controllers\College\DashboardController::class, 'index'])->name('dashboard.index');
 });

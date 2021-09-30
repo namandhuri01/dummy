@@ -18,7 +18,7 @@ class SubAdminController extends Controller
 
     public function index()
     {
-        $subadmins = User::where(['role_id' => 2, 'role_id' => 3])->paginate(15);
+        $subadmins = User::whereIn('role_id',[2,3])->withTrashed()->sortable(['deleted_at' => 'IS Null'])->get();
         return view('admin.sub-admin.index',compact('subadmins'));
     }
 
@@ -52,8 +52,14 @@ class SubAdminController extends Controller
     }
     public function destroy($id)
     {
-        $subAdmin = User::find($id);
-        $subAdmin->delete();
+        $user = User::withTrashed()->find($id);
+        $message='deactivated';
+        if($user->trashed()) {
+            $user->restore();
+            $message="activated";
+        } else{
+            $user->delete();
+        }
         $notification = array(
             'message' => 'Sub Admin deleted Successfully!',
             'alert-type' => 'success'

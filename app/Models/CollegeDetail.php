@@ -60,4 +60,8 @@ class CollegeDetail extends Model
     {
         return $this->belongsTo(CollegeType::class);
     }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class)->withPivot('college_detail_id', 'course_id');;
+    }
 }
