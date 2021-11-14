@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.college')
 @section('title', 'Change Password')
 @section('content')
     <!--Page Container-->
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="section-title">
-                            <h4>{{__('Students')}}</h4>
+                            <h4>{{__('Change Password')}}</h4>
                         </div>
                     </div>
 
@@ -72,6 +72,5 @@
 @endsection
 
 @push('scripts')
-
     <script type="text/javascript" src="{{ asset('js/common/change-password/change-password.js') }}"></script>
 @endpush

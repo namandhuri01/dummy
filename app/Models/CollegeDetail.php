@@ -35,7 +35,7 @@ class CollegeDetail extends Model
     {
         if($this->cover_image)
         {
-            $thumbPath = 'college_image/'.$this->user_id.'/coverImage/thumb_'.$this->cover_image;
+            $thumbPath = 'college_image/'.$this->user_id.'/coverImage/'.$this->cover_image;
 
             if(Storage::disk('public')->exists($thumbPath)) {
                 return Storage::url($thumbPath);

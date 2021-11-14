@@ -1,6 +1,9 @@
 .error {
     color: red !important;
 }
+.ck-editor__editable {
+    min-height: 200px;
+}
 #dataTable1 th.sorting_asc{
     background-image: url('../images/short-icon/sort_asc.png');
     background-repeat: no-repeat;

@@ -71,6 +71,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function collegeDetail()
     {
-        return $this->hasOne(CollegeDetail::class);
+        return $this->hasMany(CollegeDetail::class);
     }
 }

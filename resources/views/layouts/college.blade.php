@@ -69,7 +69,7 @@
         <!--Page Container-->
     </head>
     <body>
-       @include('admin.navs.sidebar')
+       @include('college.navs.sidebar')
         <div class="page">
                 @yield('content')
         </div>

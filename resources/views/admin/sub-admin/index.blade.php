@@ -18,27 +18,17 @@
                             <li class="breadcrumb-item active">Sub-Admins</li>
                         </ol>
                     </div>
-                    <div class="col-3 col-md-6 col-lg-4">
-                        <a href="{{route('admin.sub-admins.create')}}" class="btn btn-primary btn-round pull-right d-none d-md-block">Add New Sub Admin</a>
-                    </div>
+                    @can('create')
+                        <div class="col-3 col-md-6 col-lg-4">
+                            <a href="{{route('admin.sub-admins.create')}}" class="btn btn-primary btn-round pull-right d-none d-md-block">Add New Sub Admin</a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
         <div class="content sm-gutter">
             <div class="container-fluid padding-25 sm-padding-10">
                 <div class="row">
-                    <div class="col-12">
-                        @if(Session::has('successMessage'))
-                            <div class="alert alert-success">
-                                {{session('successMessage')}}
-                            </div>
-                        @endif
-                        @if(Session::has('errorMessage'))
-                            <div class="alert alert-danger">
-                                {{session('errorMessage')}}
-                            </div>
-                        @endif
-                    </div>
                     <div class="col-6">
                         <div class="section-title">
                             <h4>{{__('Sub-Admins')}}</h4>
@@ -60,43 +50,52 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($subadmins as $user)
-                                                <tr>
-                                                    <td>{{$loop->index+1}}</td>
-                                                    <td class="name">{{$user->name}}</td>
-                                                    <td>{{$user->email}}</td>
-                                                    <td>{{$user->role_name}}</td>
-                                                    <td class="d-flex">
-														@if(!$user->deleted_at)
-							                          		<form action="{{ route('admin.sub-admins.destroy',['sub_admin' => $user->id ]) }}" method="POST">
-															  	{{ csrf_field() }}
-															  	{{ method_field('DELETE') }}
-							                          			<a href="#">
-							                          				<i class="fa fa-trash" data-message="delete">
-							                          					Delete
-							                          				</i>
-							                          			</a>
-															</form>
-														@else
-							                          		<form action="{{ route('admin.sub-admins.destroy',[ 'sub_admin' => $user->id ]) }}" method="POST">
-															  	{{ csrf_field() }}
-															  	{{ method_field('DELETE') }}
-							                          			<a href="#">
-							                          				<i class="fa fa-undo text-danger" data-message="restore">
-							                          					Restore
-							                          				</i>
-							                          			</a>
-															</form>
-														@endif
-														<a class="ml-3" href="{{ route('admin.sub-admins.show', [ 'sub_admin'=> $user->id ]) }}" >
-					                          				<i class="fa fa-eye"></i> View
-														  </a>
-														  <a class="ml-3" href="{{ route('admin.sub-admins.edit', [ 'sub_admin'=> $user->id ]) }}" >
-															<i class="fa fa-pencil"></i> Edit
-														</a>
-						                          	</td>
-                                                </tr>
-                                            @endforeach
+                                            @can('index')
+                                                @foreach($subadmins as $user)
+                                                    <tr>
+                                                        <td>{{$loop->index+1}}</td>
+                                                        <td class="name">{{$user->name}}</td>
+                                                        <td>{{$user->email}}</td>
+                                                        <td>{{$user->role_name}}</td>
+                                                        <td class="d-flex">
+                                                        @can('show')
+                                                            <a class="ml-3" href="{{ route('admin.sub-admins.show', [ 'sub_admin'=> $user->id ]) }}" >
+                                                                <i class="fa fa-eye"></i> View
+                                                            </a>
+                                                        @endcan
+                                                        @can('edit')
+                                                            <a class="ml-3" href="{{ route('admin.sub-admins.edit', [ 'sub_admin'=> $user->id ]) }}" >
+                                                                <i class="fa fa-pencil"></i> Edit
+                                                            </a>
+                                                        @endcan
+                                                        @can('delete')
+                                                            @if(!$user->deleted_at)
+                                                                <form action="{{ route('admin.sub-admins.destroy',['sub_admin' => $user->id ]) }}" method="POST">
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+                                                                    <a href="#">
+                                                                        <i class="fa fa-trash" data-message="delete">
+                                                                            Delete
+                                                                        </i>
+                                                                    </a>
+                                                                </form>
+                                                            @else
+                                                                <form action="{{ route('admin.sub-admins.destroy',[ 'sub_admin' => $user->id ]) }}" method="POST">
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+                                                                    <a href="#">
+                                                                        <i class="fa fa-undo text-danger" data-message="restore">
+                                                                            Restore
+                                                                        </i>
+                                                                    </a>
+                                                                </form>
+                                                            @endif
+                                                        @endcan
+                                                        
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endcan
                                         </tbody>
                                     </table>
                                 </div>

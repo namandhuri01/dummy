@@ -41,6 +41,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(gettype((int)$request->fee));
         $request->validate([
             'name'              => 'bail|required|string',
             'type'              => 'bail|required|string',
@@ -49,10 +50,10 @@ class CourseController extends Controller
             'eligibility'       => 'bail|required|string',
             'fee'               => 'bail|required',
         ]);
-        $category = Course::create([
+        $course = Course::create([
             'name'              => $request->name,
             'type'              => $request->type,
-            'fee'               => $request->fee,
+            'fee'               => (int)$request->fee,
             'duration'          => $request->duration,
             'course_details'    => $request->course_details,
             'eligibility'       => $request->eligibility,
@@ -61,17 +62,26 @@ class CourseController extends Controller
             'message' => 'Course Created Successfully!',
             'alert-type' => 'success'
         );
-        return back()->with($notification);
+        return redirect()->route('admin.courses.index')->with($notification);
     }
 
+    public function edit(Course $course)
+    {
+        // $course = Course::find($id);
+        return view('admin.course.edit',compact('course'));
+    }
     public function update(Request $request, Course $course)
     {
         $request->validate([
-            'name'   => 'bail|required|string',
-            'type'   => 'bail|required|string'
+            'name'              => 'bail|required|string',
+            'type'              => 'bail|required|string',
+            'duration'          => 'bail|required|string',
+            'course_details'    => 'bail|required|string',
+            'eligibility'       => 'bail|required|string',
+            'fee'               => 'bail|required',
         ]);
 
-        $category->update($request->all());
+        $course->update($request->all());
 
         $notification = array(
             'message' => 'Category Updatd Successfully!',

@@ -1,9 +1,9 @@
 @extends('layouts.admin')
-
+@section('title', 'College')
 @section('content')
 
 <section class="page-container">
-    <div class="page-content-wrapper">
+    <div class="container-fluid">
         <main>
             <div class="bg-white px-4 py-2 mt-4 shadow-sm">
                 <div class="row">
@@ -17,14 +17,14 @@
                                     <img src="{{ ($profile)?$profile->thumb_logo:asset('images/profile/profile.png') }}">
                                 </div>
                                 <div class="d-flex flex-column">
-                                    <div id="u-name" class="ml-3">{{__($user->full_name)}}</div>
+                                    <div id="u-name" class="ml-3">{{__($user->name)}}</div>
                                     <div class="text-white ml-3"><strong>{{ $user->email }}</strong></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="card-body food-order-tab px-0">
                             <ul class="nav nav-pills border-b-0">
@@ -36,7 +36,7 @@
                                 <div class="tab-pane fade show active " id="business_detail">
                                     <div class="col-lg-12">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-8">
                                                 <div class="details-info">
                                                     <h3> College Detail</h3>
                                                     <table class="table">
@@ -210,7 +210,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
             <!-- <div class="bg-white p-4 mt-4 shadow-sm">
             </div> -->
@@ -219,28 +219,7 @@
 @endsection
 @push('css')
 <style>
-.tags {
-    font-size: 12px;
-    font-weight: 400;
-    color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
-    border-radius: 25px;
-    background-color: #19b0a2;
-    padding: 0px 10px;
-    display: inline-block;
-
-}
-.non-veg {
-    font-size: 12px;
-    font-weight: 400;
-    color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
-    border-radius: 25px;
-    background-color: #f52323;
-    padding: 0px 10px;
-    display: inline-block;
-}
-#profile-banner-image {
+.#profile-banner-image {
     overflow: hidden;
     max-height: 300px;
 }
@@ -261,9 +240,9 @@
     margin-left: 40px; */
     position: absolute;
     z-index: 1;
-    top: 0;
+    top: -200px;
     bottom: 0;
-    left: 20px;
+    left: 255px;
 }
 
 #u-name {

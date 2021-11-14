@@ -6,8 +6,7 @@
     <!--Navigation Profile area-->
     <div class="navigation-profile">
         <img class="profile-img rounded-circle" src="{{ asset('admin-asset/images/1.jpg') }}" alt="profile image">
-        <h4 class="name">@if(Auth::check()){{Auth::user()->first_name}}@endif</h4>
-        <span class="designation">{{auth()->user()->role}}</span>
+        <h4 class="name">@if(Auth::check()){{ucwords(auth()->user()->name)}}@endif</h4>
 
         <a id="show-user-menu" href="javascript:void(0);" class="circle-white-btn profile-setting"><i class="fa fa-cog"></i></a>
 
@@ -15,18 +14,18 @@
         <div class="logged-user-menu bg-white">
             <div class="avatar-info">
                 <img class="profile-img rounded-circle" src="{{ asset('admin-asset/images/1.jpg') }}" alt="profile image">
-                <h4 class="name">@if(Auth::check()){{Auth::user()->first_name}}@endif</h4>
+                <h4 class="name">@if(Auth::check()){{ucwords(auth()->user()->name)}}@endif</h4>
             </div>
 
             <ul class="list-unstyled">
                 <li>
-                    <a href="javascript:void(0);">
+                    <a href="{{route('college.profile.index')}}">
                         <i class="ion-ios-person-outline"></i>
                         <span>My Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{rouute('college.change-password.index')}}">
+                    <a href="{{route('college.change-password.index')}}">
                         <i class="ion-ios-locked-outline"></i>
                         <span>Change Password</span>
                     </a>
@@ -63,10 +62,10 @@
             <li>
                 <a href="dashboard_tasks-list.html">
                     <span class="icon-thumbnail"><i class="dripicons-list"></i></span>
-                    <span class="title">Tasks List</span>
+                    <span class="title">Profile</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="apps_calendar.html">
                     <span class="icon-thumbnail"><i class="fa fa-calendar"></i></span>
                     <span class="title">Full Calendar</span>
@@ -279,7 +278,7 @@
                     <span class="icon-thumbnail"><i class="dripicons-document"></i></span>
                     <span class="title">Documentation</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </nav>

@@ -477,7 +477,6 @@
         });
     });
 </script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
     <script src="{{asset('js/common/college/ckeditor-ini.js')}}"></script>
     <script src="{{asset('js/common/college/college-edit.js')}}"></script>
 

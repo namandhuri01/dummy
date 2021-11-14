@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Users')
+@section('title', 'Courses')
 @section('content')
     <!--Page Container-->
 <section class="page-container">
@@ -18,6 +18,11 @@
                             <li class="breadcrumb-item active">Courses</li>
                         </ol>
                     </div>
+                    @can('create')
+                        <div class="col-3 col-md-6 col-lg-4">
+                            <a href="{{route('admin.courses.create')}}" class="btn btn-primary btn-round pull-right d-none d-md-block">Add New Course</a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -51,12 +56,36 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Email</th>
+                                                <th>Type</th>
+                                                <th>Fee</th>
+                                                <th>Duration</th>
+                                                <th>Detail</th>
+                                                <th>Eligibility</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            @can('index')
+                                                @foreach ($courses as $course )
+                                                    <tr>
+                                                        <td>{{$loop->index+1}}</td>
+                                                        <td class="name">{{$course->name}}</td>
+                                                        <td class="name">{{$course->type}}</td>
+                                                        <td class="name">Rs{{$course->fee}}</td>
+                                                        <td class="name">{{$course->duration}}</td>
+                                                        <td class="name">{!!$course->course_details!!}</td>
+                                                        <td class="name">{!!$course->eligibility!!}</td>
+                                                        <td>
+                                                            @can('edit')
+                                                                <a href="{{route('admin.courses.edit',$course->id)}}" id="edit-item"><i class="fa fa-edit"></i></a>
+                                                            @endcan
+                                                            @can('delete')
+                                                                <a href="{{ route('admin.courses.destroy', $course->id)}}" data-method="delete" class="category-delete" ><i class="fa fa-trash"></i></a>
+                                                            @endcan
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endcan
                                         </tbody>
                                     </table>
                                 </div>

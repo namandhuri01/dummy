@@ -25,7 +25,11 @@ class DashboardController extends Controller
         ->where('role_id', '=', 4)->count();
         $totalRegisteredCollegesMonth = User::whereMonth('created_at', Carbon::now()->month)
         ->where('role_id', '=', 5)->count();
-        return view('admin.dashboard.index',compact('totalRegisteredStudentsMonth','totalRegisteredCollegesMonth'));
+        $totalRegisteredStudentsYear = User::whereYear('created_at',  Carbon::now()->year)
+        ->where('role_id', '=', 4)->count();
+        $totalRegisteredCollegesYear = User::whereYear('created_at', Carbon::now()->year)
+        ->where('role_id', '=', 5)->count();
+        return view('admin.dashboard.index',compact('totalRegisteredStudentsYear','totalRegisteredCollegesYear','totalRegisteredStudentsMonth','totalRegisteredCollegesMonth'));
     }
 
     /**

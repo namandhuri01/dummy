@@ -14,7 +14,7 @@
         <div class="logged-user-menu bg-white">
             <div class="avatar-info">
                 <img class="profile-img rounded-circle" src="{{ asset('admin-asset/images/1.jpg') }}" alt="profile image">
-                <h4 class="name">@if(Auth::check()){{Auth::user()->first_name}}@endif</h4>
+                <h4 class="name">@if(Auth::check()){{Auth::user()->name}}@endif</h4>
             </div>
 
             <ul class="list-unstyled">

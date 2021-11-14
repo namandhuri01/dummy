@@ -105,6 +105,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
         <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
         <!-- (Optional) Latest compiled and minified JavaScript translation files -->
         {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script> --}}
         <script>

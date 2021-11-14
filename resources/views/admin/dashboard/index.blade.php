@@ -46,14 +46,14 @@
 
                     <div class="col-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="block counter-block down mb-4">
-                            <div class="value">{{$totalRegisteredStudentsMonth}}</div>
+                            <div class="value">{{$totalRegisteredStudentsYear}}</div>
                             <p class="label">Student Current Year</p>
                         </div>
                     </div>
 
                     <div class="col-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="block counter-block mb-4">
-                            <div class="value">{{$totalRegisteredCollegesMonth}}</div>
+                            <div class="value">{{$totalRegisteredCollegesYear}}</div>
                             <p class="label">College Current Year</p>
                         </div>
                     </div>

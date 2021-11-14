@@ -49,7 +49,9 @@ Route::prefix('college')
     })
     ->name('login')
     ->middleware('guest');
+    Route::get('dashbaord',[App\Http\Controllers\College\DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/change-password',[App\Http\Controllers\College\ChangePasswordController::class, 'index'])->name('change-password.index');
     Route::post('/change-password',[App\Http\Controllers\College\ChangePasswordController::class, 'store'])->name('change-password.store');
-    Route::get('dashboard',[App\Http\Controllers\College\DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('profile',[App\Http\Controllers\College\ProfileController::class, 'index'])->name('profile.index');
+    Route::put('profile/{id}',[App\Http\Controllers\College\ProfileController::class, 'update'])->name('profile.update');
 });

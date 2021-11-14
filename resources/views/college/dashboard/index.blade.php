@@ -1,5 +1,5 @@
 
-@extends('layouts.admin')
+@extends('layouts.college')
 @section('title', 'DashBoard')
 @section('content')
 <section class="page-container">
@@ -29,7 +29,33 @@
                             <h4>Overview</h4>
                         </div>
                     </div>
+                     <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="block counter-block down mb-4">
+                            <div class="value">10</div>
+                            <p class="label">Lead Month</p>
+                        </div>
+                    </div>
 
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="block counter-block mb-4">
+                            <div class="value">10</div>
+                            <p class="label">Review</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="block counter-block down mb-4">
+                            <div class="value">10</div>
+                            <p class="label">Lead This Year</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="block counter-block mb-4">
+                            <div class="value">10</div>
+                            <p class="label">fav</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

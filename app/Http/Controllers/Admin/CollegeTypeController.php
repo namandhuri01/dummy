@@ -22,5 +22,36 @@ class CollegeTypeController extends Controller
         $collegeTypes = CollegeType::paginate(15);
         return view('admin.college-type.index',compact('collegeTypes'));
     }
+    public function store(Request $request){
+        // dd($request->all());
+        $request->validate([
+            'name'  => 'bail|required|string',
+            'remark'=> 'bail|required|string'
+        ]);
+        $data = $request->input();
+        $collegetype = CollegeType::create($data);
+        $notification = array(
+            'message' => 'Collegetype created Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.college-type.index')->with($notification);
+    }
+    public function update(Request $request, $id){
+        $request->validate([
+            'name'  => 'bail|required|string',
+            'remark'=> 'bail|required|string'
+        ]);
+        $data = $request->input();
+        $collegetype = CollegeType::find($id);
+        $collegetype->update($data);
+        $notification = array(
+            'message' => 'Collegetype updated Successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('admin.college-type.index')->with($notification);
+    }
+    public function destroy($id)
+    {
 
+    }
 }

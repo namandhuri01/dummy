@@ -14,6 +14,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+        // dd("qqq");
         return view('college.dashboard.index');
     }
 }

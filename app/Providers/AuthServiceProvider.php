@@ -51,8 +51,8 @@ class AuthServiceProvider extends ServiceProvider
         'show'      => [3],
         'create'    => [2,3],
         'store'     => [2,3],
-        'edit'      => [2,3],
-        'update'    => [2,3],
+        'edit'      => [2],
+        'update'    => [2],
         'destroy'   => [1],
     ];
 }

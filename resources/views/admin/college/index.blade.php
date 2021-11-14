@@ -18,27 +18,17 @@
                             <li class="breadcrumb-item active">{{__('Colleges')}}</li>
                         </ol>
                     </div>
-                    <div class="col-3 col-md-6 col-lg-4">
-                        <a href="{{route('admin.colleges.create')}}" class="btn btn-primary btn-round pull-right d-none d-md-block">Add New College</a>
-                    </div>
+                    @can('create')
+                        <div class="col-3 col-md-6 col-lg-4">
+                            <a href="{{route('admin.colleges.create')}}" class="btn btn-primary btn-round pull-right d-none d-md-block">Add New College</a>
+                        </div>
+                    @endcan
                 </div>
             </div>
         </div>
         <div class="content sm-gutter">
             <div class="container-fluid padding-25 sm-padding-10">
                 <div class="row">
-                    <div class="col-12">
-                        @if(Session::has('successMessage'))
-                            <div class="alert alert-success">
-                                {{session('successMessage')}}
-                            </div>
-                        @endif
-                        @if(Session::has('errorMessage'))
-                            <div class="alert alert-danger">
-                                {{session('errorMessage')}}
-                            </div>
-                        @endif
-                    </div>
                     <div class="col-6">
                         <div class="section-title">
                             <h4>{{__('Colleges')}}</h4>
@@ -64,6 +54,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @can('index')
                                             @foreach($colleges as $user)
                                                 <?php
                                                     $collegeDetail = $user->collegeDetail ? $user->collegeDetail : [];
@@ -108,6 +99,7 @@
 						                          	</td>
                                                 </tr>
                                             @endforeach
+                                        @endcan
                                         </tbody>
                                     </table>
                                 </div>
